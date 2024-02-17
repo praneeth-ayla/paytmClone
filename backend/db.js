@@ -3,14 +3,6 @@ const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://admin:7TJaFOLSF1g9GjIO@cluster0.sduruc7.mongodb.net/paytm");
 
 const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-    },
-    lastName: {
-        type: String,
-        required: true,
-    },
     username: {
         type: String,
         required: true,
@@ -21,10 +13,17 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true, minLength: 6
+    }, firstName: {
+        type: String,
+        required: true,
     },
+    lastName: {
+        type: String,
+        required: true,
+    }
 });
 
-const User = new mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema)
 
 
 
