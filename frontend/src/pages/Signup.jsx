@@ -5,12 +5,15 @@ import SubHeading from "../components/SubHeading";
 import InputBox from "../components/InputBox";
 import Button from "../components/Button";
 import BottomWarning from "../components/BottomWarning";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
 	const [firstname, setFirstname] = useState("");
 	const [lastname, setLastname] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+
+	const navigate = useNavigate();
 	return (
 		<div className="flex justify-center h-screen bg-slate-300">
 			<div className="flex flex-col justify-center">
@@ -60,6 +63,7 @@ function Signup() {
 								}
 							);
 							localStorage.setItem("token", response.data.token);
+							navigate("/dashboard");
 						}}
 						label={"Sign Up"}></Button>
 					<BottomWarning
