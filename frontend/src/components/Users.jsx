@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Users() {
 	const [users, setUsers] = useState([]);
@@ -40,6 +41,7 @@ function Users() {
 }
 
 function User({ user }) {
+	const navigate = useNavigate();
 	return (
 		<div className="flex justify-between">
 			<div className="flex">
@@ -53,7 +55,13 @@ function User({ user }) {
 				</div>
 			</div>
 
-			<Button label={"Send Money"}></Button>
+			<Button
+				onClick={() => {
+					navigate(
+						"/sendmoney?id=" + user._id + "&name=" + user.firstname
+					);
+				}}
+				label={"Send Money"}></Button>
 		</div>
 	);
 }
