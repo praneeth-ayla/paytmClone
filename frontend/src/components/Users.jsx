@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
+import axios from "axios";
 
 function Users() {
-	const [users, setUsers] = useState([
-		{ firstName: "Harkirat", lastName: "Singh", _id: 1 },
-		{ firstName: "news", lastName: "trial", _id: 2 },
-		{ firstName: "Praneeth", lastName: "ayla", _id: 3 },
-	]);
+	const [users, setUsers] = useState([]);
+	const [filter, setFilter] = useState("");
+
+	useEffect(() => {
+		axios
+			.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
+			.then((response) => {
+				setUsers(response.data.allUsers);
+			});
+	}, [filter]);
 
 	return (
-		<>
+		<div>
 			<div className="mt-6 text-lg font-bold ">Users</div>
 			<div className="my-2">
 				<input
 					type="text"
 					placeholder="Search users..."
 					className="w-full px-2 py-1 border rounded border-slate-200"
+					onChange={(e) => {
+						setFilter(e.target.value);
+					}}
 				/>
 			</div>
 			<div>
 				{users.map((user) => (
-					<User user={user} />
+					<User
+						user={user}
+						key={user._id}
+					/>
 				))}
 			</div>
-		</>
+		</div>
 	);
 }
 
@@ -33,11 +45,11 @@ function User({ user }) {
 			<div className="flex">
 				<div className="flex justify-center w-12 h-12 mt-1 mr-2 rounded-full bg-slate-200">
 					<div className="flex flex-col justify-center h-full text-xl">
-						{user.firstName[0]}
+						{user.firstname[0]}
 					</div>
 				</div>
 				<div className="flex flex-col justify-center h-full ">
-					{user.firstName} {user.lastName}
+					{user.firstname} {user.lastname}
 				</div>
 			</div>
 
