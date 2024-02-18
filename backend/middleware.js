@@ -6,6 +6,7 @@ const authMiddleware = (req, res, next) => {
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(403).json({
+            msg: "You do not have access"
         })
     }
     const token = authHeader.split(' ')[1];

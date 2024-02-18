@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true, minLength: 6
-    }, firstName: {
+    }, firstname: {
         type: String,
         required: true, trim: true,
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true, trim: true,
     }
